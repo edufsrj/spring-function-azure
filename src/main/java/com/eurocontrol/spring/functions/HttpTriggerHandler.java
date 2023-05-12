@@ -13,6 +13,7 @@ import java.util.Optional;
 /**
  * Azure Functions with HTTP Trigger.
  */
+
 public class HttpTriggerHandler extends FunctionInvoker<String, TestModel> {
 
     private final TestService service;
