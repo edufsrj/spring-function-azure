@@ -4,7 +4,7 @@ A simple *POC* to use spring cloud functions in a azure function environment
 
 
 ## Advantages
-* **N/A**
+* **None**
 
 ## Disadvantages
 * Bigger startup time and execution time in general
