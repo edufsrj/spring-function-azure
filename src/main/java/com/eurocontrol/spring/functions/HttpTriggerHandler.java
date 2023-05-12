@@ -2,10 +2,13 @@ package com.eurocontrol.spring.functions;
 
 import com.eurocontrol.spring.functions.model.Test;
 import com.eurocontrol.spring.functions.service.TestService;
+import com.google.gson.Gson;
 import com.microsoft.azure.functions.*;
 import com.microsoft.azure.functions.annotation.AuthorizationLevel;
 import com.microsoft.azure.functions.annotation.FunctionName;
 import com.microsoft.azure.functions.annotation.HttpTrigger;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.cloud.function.adapter.azure.FunctionInvoker;
 
@@ -14,10 +17,13 @@ import java.util.Optional;
 /**
  * Azure Functions with HTTP Trigger.
  */
-@RequiredArgsConstructor
 public class HttpTriggerHandler extends FunctionInvoker<String, Test> {
 
     private final TestService service;
+
+    public HttpTriggerHandler() {
+        this.service = new TestService();
+    }
 
     @FunctionName("spring-test")
     public HttpResponseMessage run(

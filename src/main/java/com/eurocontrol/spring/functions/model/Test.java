@@ -9,5 +9,5 @@ public class Test {
 
     private String id;
     private String test;
-    private Instant now = Instant.now();
+    private String now;
 }
