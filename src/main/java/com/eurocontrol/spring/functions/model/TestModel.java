@@ -2,10 +2,8 @@ package com.eurocontrol.spring.functions.model;
 
 import lombok.Data;
 
-import java.time.Instant;
-
 @Data
-public class Test {
+public class TestModel {
 
     private String id;
     private String test;
