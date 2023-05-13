@@ -1,8 +1,11 @@
 package com.eurocontrol.spring.functions;
 
 import com.eurocontrol.spring.functions.model.TestModel;
-import com.eurocontrol.spring.functions.service.TestService;
-import com.microsoft.azure.functions.*;
+import com.microsoft.azure.functions.ExecutionContext;
+import com.microsoft.azure.functions.HttpMethod;
+import com.microsoft.azure.functions.HttpRequestMessage;
+import com.microsoft.azure.functions.HttpResponseMessage;
+import com.microsoft.azure.functions.HttpStatus;
 import com.microsoft.azure.functions.annotation.AuthorizationLevel;
 import com.microsoft.azure.functions.annotation.FunctionName;
 import com.microsoft.azure.functions.annotation.HttpTrigger;
@@ -16,12 +19,6 @@ import java.util.Optional;
 
 public class HttpTriggerHandler extends FunctionInvoker<String, TestModel> {
 
-    private final TestService service;
-
-    public HttpTriggerHandler() {
-        this.service = new TestService();
-    }
-
     @FunctionName("spring-test")
     public HttpResponseMessage run(
             @HttpTrigger(name = "req",
@@ -30,7 +27,7 @@ public class HttpTriggerHandler extends FunctionInvoker<String, TestModel> {
             final ExecutionContext context) {
         context.getLogger().info("Java HTTP trigger processed a request.");
         var message = request.getBody().orElse("");
-        var test = service.apply(message);
+        var test = super.handleRequest(message, context);
         return request.createResponseBuilder(HttpStatus.OK).body(test).build();
     }
 }
